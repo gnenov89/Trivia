@@ -2,24 +2,50 @@
 body {
 
 background: url(../assets/images/triviaBackround.jpg);
-font-family:  Impact, White, sans-serif;;
+font-family: 'Tangerine', serif;
+font-size: 48px;
+text-shadow: 4px 4px 4px #aaa;
 }
 
 
 .jumbotron{
 
-background-color:#F5F5DC;
+
 margin:15px;
 position: absolute;
 background: url(../assets/images/history.jpg);
-
+font-family: 'Tangerine', serif;
+font-size: 48px;
+color: white;
 
    
 }
+h1 {
 
+ font-family: 'Tangerine', serif;
+ font-size:120px;
+ color: white;
+ } 
+
+p : hover {
+ background-color: yellow;
+ font-family: 'Tangerine', serif;
+ font-size: 120px;
+ color: black;
+ }
 
 #timer{
-	font-size: 35px;
+	font-size: 48px;
+	font-family: 'Tangerine', serif;
 }
 
+#start-button {
+
+width: 100%;
+margin: 0;
+padding:40px;
+background: url(../assets/images/1.jpg);
+border-style: solid;
+
+}
 

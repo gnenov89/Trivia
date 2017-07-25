@@ -2,15 +2,15 @@ window.onload = function() {
 
 var timerSet = $ ("#timer");
 var questionAsk = $("#question");
+
 var answerOne = $("#answer-one");
 var answerTwo = $("#answer-two");
 var answerTree = $("#answer-tree");
 var answerFour = $("#answer-four");
-var strartGame = $("#tart-button-div");
+var startGame = $("#start-button");
 var wins = $("#wins");
 var losses = $("#losses");
 var unAnswered = $("#unanswered");
-
 
 var winCount = 0;
 var lossCount = 0;
@@ -22,7 +22,7 @@ var gameObject = [
 
 {
 
-question: "What year World war two begin?",
+question: "What year did World war two begin?",
 answer1:"1939",
 answer2:"1940",
 answer3:"1945",
@@ -93,16 +93,104 @@ background: "background-image",
 image:"url(../images/100.jpg)",
 
 }]
-}
+
+
+
+// timerSet.hide();
+// answerOne.hide();
+// answerTwo.hide();
+// answerTree.hide();
+// answerFour.hide();
+// questionAsk.hide();
+
+
+
+
+function startGame() {
+
+
+	$("#start-button").click(function(){
+
+	
+timerSet.show();
+    
+startGame.show();
+
+});
+
+
+
+} // end of start game function 
+
+
+
+var offset =0;
+
+
+var stopwatch = {
+	time: 30,
+	start: function() {
+	clockRunning = false;	
+	$("#timer").html("30:00");// Use setInterval to start the count here and set the clock to running.
+
+
+    if (!clockRunning) {
+        intervalId = setInterval(stopwatch.count, 1000);
+        clockRunning = true;
+    }
+  },
+
+  count: function() {
+
+ //increment time by 1, remember we cant use "this" here.
+   stopwatch.time--;
+
+ // Get the current time, pass that into the stopwatch.timeConverter function,
+ // and save the result in a variable.
+    var converted = stopwatch.timeConverter(stopwatch.time);
+    console.log(converted);
+
+ //  Use the variable we just created to show the converted time in the "display" div.
+
+    $("#timer").html(converted);
+  },
+
+
+
+  timeConverter: function(t) {
+  	var seconds = t;
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return 00 + ":" + seconds;
+  }
+};
+
+
+setInterval(function(){
+
+	if(offset == 6){
+	  offset = 0;    
+	}
+
+stopwatch.start();
+
+	$("#question").html(gameObject[offset].question);
+	$("#answer-one").html(gameObject[offset].answer1);
+	$("#answer-two").html(gameObject[offset].answer2);
+	$("#answer-tree").html(gameObject[offset].answer3);
+	$("#answer-four").html(gameObject[offset].answer4);
+	offset++;
+	
+}, 3000);
 
 
 
 
 
 
-
-
-
+} // end of windows.onLoad
 
 
 
