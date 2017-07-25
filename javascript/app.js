@@ -1,13 +1,13 @@
 window.onload = function() {
 
-var timerSet = $ ("#timer");
-var questionAsk = $("#question");
+var timer= $("#timer");
+var questionField = $("#question");
 
 var answerOne = $("#answer-one");
 var answerTwo = $("#answer-two");
 var answerTree = $("#answer-tree");
 var answerFour = $("#answer-four");
-var startGame = $("#start-button");
+var startButton = $("#start-button");
 var wins = $("#wins");
 var losses = $("#losses");
 var unAnswered = $("#unanswered");
@@ -21,7 +21,6 @@ var gameCount = 0;
 var gameObject = [
 
 {
-
 question: "What year did World war two begin?",
 answer1:"1939",
 answer2:"1940",
@@ -96,69 +95,89 @@ image:"url(../images/100.jpg)",
 
 
 
-// timerSet.hide();
-// answerOne.hide();
-// answerTwo.hide();
-// answerTree.hide();
-// answerFour.hide();
-// questionAsk.hide();
+timer.hide();
+answerOne.hide();
+answerTwo.hide();
+answerTree.hide();
+answerFour.hide();
+questionField.hide();
 
 
 
 
-function startGame() {
 
 
-	$("#start-button").click(function(){
+startButton.on("click",function(){
+  $("#question").html(gameObject[0].question);
+  $("#answer-one").html(gameObject[0].answer1);
+  $("#answer-two").html(gameObject[0].answer2);
+  $("#answer-tree").html(gameObject[0].answer3);
+  $("#answer-four").html(gameObject[0].answer4);
 
-	
-timerSet.show();
-    
-startGame.show();
-
+  stopwatch.start();
+    timer.show();
+  answerOne.show();
+  answerTwo.show();
+  answerTree.show();
+  answerFour.show();
+  questionField.show();
 });
 
 
 
-} // end of start game function 
+
+var offset = 1;
 
 
-
-var offset =0;
 
 
 var stopwatch = {
-	time: 30,
-	start: function() {
-	clockRunning = false;	
-	$("#timer").html("30:00");// Use setInterval to start the count here and set the clock to running.
+    time: 30,
+
+    start: function() {
+      clockRunning = false;    
+      timer.html("30:00");// Use setInterval to start the count here and set the clock to running.
 
 
-    if (!clockRunning) {
-        intervalId = setInterval(stopwatch.count, 1000);
-        clockRunning = true;
-    }
+      if (!clockRunning) {
+          intervalId = setInterval(stopwatch.count, 1000);
+          clockRunning = true;
+      }
   },
 
   count: function() {
+    if(offset == 6){
+      offset = 0;    
+    }
+    
+    
+    //increment time by 1, remember we cant use "this" here.
+    stopwatch.time--;
 
- //increment time by 1, remember we cant use "this" here.
-   stopwatch.time--;
-
- // Get the current time, pass that into the stopwatch.timeConverter function,
- // and save the result in a variable.
+    // Get the current time, pass that into the stopwatch.timeConverter function,
+    // and save the result in a variable.
     var converted = stopwatch.timeConverter(stopwatch.time);
     console.log(converted);
 
- //  Use the variable we just created to show the converted time in the "display" div.
+    //  Use the variable we just created to show the converted time in the "display" div.
+    timer.html(converted);
+    if(stopwatch.time <= 0){
+      $("#question").html(gameObject[offset].question);
+      $("#answer-one").html(gameObject[offset].answer1);
+      $("#answer-two").html(gameObject[offset].answer2);
+      $("#answer-tree").html(gameObject[offset].answer3);
+      $("#answer-four").html(gameObject[offset].answer4);
 
-    $("#timer").html(converted);
+      offset++
+      stopwatch.time = 30;
+    }
+  
   },
 
 
 
   timeConverter: function(t) {
-  	var seconds = t;
+      var seconds = t;
     if (seconds < 10) {
       seconds = "0" + seconds;
     }
@@ -170,20 +189,9 @@ var stopwatch = {
 
 setInterval(function(){
 
-	if(offset == 6){
-	  offset = 0;    
-	}
 
-stopwatch.start();
-
-	$("#question").html(gameObject[offset].question);
-	$("#answer-one").html(gameObject[offset].answer1);
-	$("#answer-two").html(gameObject[offset].answer2);
-	$("#answer-tree").html(gameObject[offset].answer3);
-	$("#answer-four").html(gameObject[offset].answer4);
-	offset++;
-	
-}, 3000);
+    
+}, 30000);
 
 
 
@@ -191,7 +199,6 @@ stopwatch.start();
 
 
 } // end of windows.onLoad
-
 
 
 
